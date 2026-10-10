@@ -1,0 +1,15 @@
+.DS_Store
+
+# build output (rebuilt by scripts/build.sh)
+build/
+
+# promo-video project: kept locally, not published
+# (it embeds Apple's wallpaper and Dock icons, which are Apple's)
+demo-remotion/
+
+# local secrets / state, in case they ever land in this folder
+api_key
+memory.json
+config.json
+*.gguf
+*.log

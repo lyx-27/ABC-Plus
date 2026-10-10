@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key><string>en</string>
+	<key>CFBundleExecutable</key><string>ABCPlus</string>
+	<key>CFBundleIdentifier</key><string>io.github.lyx-27.inputmethod.ABCPlus</string>
+	<key>CFBundleName</key><string>ABC+</string>
+	<key>CFBundleDisplayName</key><string>ABC+</string>
+	<key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+	<key>CFBundlePackageType</key><string>APPL</string>
+	<key>CFBundleShortVersionString</key><string>0.3.0</string>
+	<key>CFBundleVersion</key><string>3</string>
+	<key>LSMinimumSystemVersion</key><string>14.0</string>
+	<key>LSUIElement</key><true/>
+	<key>NSPrincipalClass</key><string>NSApplication</string>
+	<key>InputMethodConnectionName</key><string>io.github.lyx-27.inputmethod.ABCPlus_Connection</string>
+	<key>InputMethodServerControllerClass</key><string>ABCPlusInputController</string>
+	<key>tsInputMethodCharacterRepertoireKey</key><array><string>Latn</string></array>
+	<key>tsInputMethodIconFileKey</key><string>icon.tiff</string>
+	<key>TISIconIsTemplate</key><true/>
+	<key>TISIntendedLanguage</key><string>en</string>
+	<key>TICapsLockLanguageSwitchCapable</key><true/>
+	<key>NSAppTransportSecurity</key>
+	<dict><key>NSAllowsLocalNetworking</key><true/></dict>
+</dict>
+</plist>
