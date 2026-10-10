@@ -68,7 +68,15 @@ write_plist() {   # MODEL_PATH
 EOF
 }
 
-start() { launchctl bootout "gui/$UID/$LABEL" 2>/dev/null || true; launchctl bootstrap "gui/$UID" "$PLIST"; }
+start() {
+  # bootout returns before launchd has finished removing a running service, and bootstrapping
+  # right away fails with "Input/output error". Wait until it is really gone, then retry.
+  launchctl bootout "gui/$UID/$LABEL" 2>/dev/null || true
+  local i
+  for i in {1..40}; do launchctl print "gui/$UID/$LABEL" >/dev/null 2>&1 || break; sleep 0.25; done
+  for i in {1..5}; do launchctl bootstrap "gui/$UID" "$PLIST" 2>/dev/null && return 0; sleep 1; done
+  launchctl bootstrap "gui/$UID" "$PLIST"     # last attempt, lets the real error show
+}
 
 case "${1:-status}" in
   use)
