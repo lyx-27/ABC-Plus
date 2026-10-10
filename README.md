@@ -162,6 +162,39 @@ The built-in English input source is called ABC. This one adds the things it lac
 **Can I stop it from correcting a word?**
 Press Esc once and it keeps your spelling and remembers it. Type a word twice and it is left alone from then on.
 
+## Troubleshooting
+
+**I installed it, but ABC+ does not appear in the input menu, or it does nothing when I pick it.**
+macOS can keep showing the old list of input sources after an input method is installed or replaced, and no app can switch a third-party input method on for you. Restart the Mac (logging out and back in may also work), then add it by hand: System Settings › Keyboard › Input Sources › Edit › **+** › English › **ABC+**. On our test Mac (macOS 27) it only worked after a restart.
+
+**It is selected, but there is no grey text and no suggestions.**
+The model server may be stopped. Check it:
+
+```sh
+curl -s --noproxy '*' http://127.0.0.1:39281/health      # should print {"status":"ok"}
+```
+
+If it prints nothing, restart it:
+
+```sh
+launchctl kickstart -k gui/$(id -u)/io.github.lyx-27.abcplus.llama
+```
+
+If it says the service cannot be found, load it again and look at the log if it still fails:
+
+```sh
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/io.github.lyx-27.abcplus.llama.plist
+tail -20 ~/Library/Logs/ABCPlus/llama.log
+```
+
+Word choices and typo fixing do not need the server, so they keep working while it is down. Only the grey sentence suggestions stop.
+
+**I reinstalled over an older version and the grey text stopped (0.3.0).**
+Version 0.3.0 could leave the server stopped when it was reinstalled over an existing install. Fixed in 0.3.1: download the latest release, or run the `launchctl bootstrap` command above once.
+
+**Does it have to keep running in the background?**
+Yes, two parts. The input method itself is started by macOS when you select ABC+. The model server runs as a background launchd service that starts at login, with no window and no Dock icon. In our check it used about 250 MB of resident memory and almost no CPU while idle. Stop it with `launchctl bootout gui/$(id -u)/io.github.lyx-27.abcplus.llama`, or remove everything with the uninstaller.
+
 ## License
 
 [MIT](LICENSE) © 777-27. The language models are downloaded separately and have their own licenses.
