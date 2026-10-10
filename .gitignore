@@ -13,3 +13,6 @@ memory.json
 config.json
 *.gguf
 *.log
+
+# release bundles (attached to GitHub Releases, not committed)
+dist/
