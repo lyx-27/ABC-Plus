@@ -54,10 +54,20 @@ Text that contains `@ / : _ - #` (usernames, URLs, e-mail addresses) is passed t
 ## Requirements
 
 - macOS 14 or later, Apple Silicon
-- Xcode Command Line Tools (`xcode-select --install`), to compile
-- [Homebrew](https://brew.sh), to install `llama.cpp`
+- [Homebrew](https://brew.sh), to install `llama.cpp` (the installer offers to install both if they are missing)
+- Only for building from source: Xcode Command Line Tools (`xcode-select --install`)
 
 ## Install
+
+### One click (no compiler needed)
+
+1. Download `ABC-Plus-<version>-macos-arm64.zip` from the [latest release](https://github.com/lyx-27/ABC-Plus/releases/latest) and unzip it.
+2. Double-click **Install ABC+.command**. It opens in Terminal, installs the app, downloads the default model (1.56 GB) and starts the local server.
+3. If macOS says it cannot verify the file, open System Settings › Privacy & Security, scroll down and click **Open Anyway**, then double-click it again. The app is not notarized by Apple.
+
+To remove it, double-click **Uninstall ABC+.command**.
+
+### From source
 
 ```sh
 git clone https://github.com/lyx-27/ABC-Plus.git
@@ -65,9 +75,10 @@ cd ABC-Plus
 ./install.sh            # default model, 1.56 GB
 ./install.sh light      # smaller and faster, 0.63 GB
 ./install.sh quality    # bigger, 2.71 GB
+./install.sh --check    # only check the prerequisites, change nothing
 ```
 
-The script builds the app, registers the input method, downloads the model (checked against its SHA-256) and starts the local server at login.
+The script builds the app, registers the input method, downloads the model (checked against its SHA-256) and starts the local server at login. `scripts/package.sh` builds the release zip.
 
 Then switch to **ABC+** in the input menu (or Ctrl+Space / the Globe key). If it is not listed: System Settings › Keyboard › Input Sources › Edit › **+** › English › **ABC+**.
 
