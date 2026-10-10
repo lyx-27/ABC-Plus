@@ -110,3 +110,7 @@ scripts/server.sh status             # check the local model server
 ```
 
 `scripts/e2e_test.swift` types into a real app and checks the result. `scripts/bench.py` measures generation speed.
+
+## License
+
+[MIT](LICENSE) © 777-27. The language models are downloaded separately and have their own licenses.
